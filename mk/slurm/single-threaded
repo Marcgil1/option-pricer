@@ -1,9 +1,14 @@
 #!/bin/bash -l
 #SBATCH --cpus-per-task 2
 
+echo "Loading modules..."
 module purge
 module load compiler/GCC
 
+echo "Compiling program..."
 g++ -o out/main.o src/main.cc
 
+echo "Executing program..."
 ./out/main.o
+
+echo "Done"
