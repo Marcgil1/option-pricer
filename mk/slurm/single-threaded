@@ -1,0 +1,9 @@
+#!/bin/bash -l
+#SBATCH --cpus-per-task 2
+
+module purge
+module load compiler/GCC
+
+g++ -o out/main.o src/main.cc
+
+./out/main.o
