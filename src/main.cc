@@ -5,10 +5,12 @@
 #include <random>
 #include <vector>
 
+#include <omp.h>
+
 #include "eulerConstantLinearEuropeanPutPricer.hh"
 #include "exactConstantLinearEuropeanPutPricer.hh"
 
-int    numTrials  = 10000;
+int    numTrials  = 100000;
 double returnRate = 0.06;
 
 int main() {

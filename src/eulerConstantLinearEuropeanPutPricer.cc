@@ -6,10 +6,12 @@ void
 EulerConstantLinearEuropeanPutPricer::calcRandomNumbers(unsigned numTrials) {
 	rndNums.clear();
 	rndNums.resize(numTrials, std::vector<double>());
-	for (auto& rnd: rndNums) {
-		rnd.resize(params.numSteps, 0.0);
-		for (auto& num: rnd)
-			numTrials = (*distribution)(*generator);
+
+	#pragma omp parallel for
+	for (int trial = 0; trial < numTrials; trial++) {
+		rndNums[trial].resize(params.numSteps, 0.0);
+		for (auto& num: rndNums[trial])
+			num = (*distribution)(*generator);
 	}
 }
 
@@ -18,6 +20,8 @@ void
 EulerConstantLinearEuropeanPutPricer::calcOptionValuations(unsigned numTrials) {
 	trialVals->clear();
 	trialVals->resize(numTrials, 0.0);
+
+	#pragma omp parallel for
 	for (int trial = 0; trial < numTrials; trial++)
 		trialVals->at(trial) = calcOptionValuation(rndNums[trial]);
 }
