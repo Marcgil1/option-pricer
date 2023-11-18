@@ -6,9 +6,9 @@ module purge
 module load compiler/GCC
 
 echo "Compiling program..."
-g++ -o out/main.o src/main.cc
+g++ src/*.cc -o out/prog
 
 echo "Executing program..."
-./out/main.o
+./out/prog
 
 echo "Done"
