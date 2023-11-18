@@ -8,13 +8,15 @@
 #include "eulerConstantLinearEuropeanPutPricer.hh"
 #include "exactConstantLinearEuropeanPutPricer.hh"
 
-int    numTrials  = 10000000;
+int    numTrials  = 10000;
 double returnRate = 0.06;
 
 int main() {
 	auto generator    = std::make_unique<std::default_random_engine>();
 	auto distribution = std::make_unique<std::normal_distribution<double>>(0.0, 1.0);
-	ExactConstantLinearEuropeanPutPricer optionPricer(std::move(generator), std::move(distribution));
+
+	// TODO: Construct `optionPricer` through factory class.
+	EulerConstantLinearEuropeanPutPricer optionPricer(std::move(generator), std::move(distribution));
 
 	auto optionVals =
 		optionPricer.calculateTrialVals(numTrials);

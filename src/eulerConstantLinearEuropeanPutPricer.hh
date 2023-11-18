@@ -13,6 +13,8 @@ class EulerConstantLinearEuropeanPutPricer {
 			double initialValue = 5;
 			double strikePrice = 10.0;
 			double totalTime = 1.0;
+			unsigned numSteps = 1000;
+			double   stepSize = totalTime / double(numSteps);
 		};
 		
 	private:
@@ -38,7 +40,7 @@ class EulerConstantLinearEuropeanPutPricer {
 
 		void   calcRandomNumbers   (unsigned numTrials);
 		void   calcOptionValuations(unsigned numTrials);
-		double calcOptionValuation (double   rnd);
+		double calcOptionValuation (std::vector<double> const& rnd);
+		double calcStockValuation  (std::vector<double> const& rnd);
 		double calcExactOptionValue(double   w);
 };
-
