@@ -1,5 +1,8 @@
 #!/bin/bash -l
-#SBATCH --cpus-per-task 10
+#SBATCH -J pricer.%j
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=2
+#SBATCH --cpus-per-task=1
 
 echo "Multi-threaded execution"
 
@@ -8,9 +11,11 @@ module purge
 module load toolchain/gompi
 
 echo "Compiling program..."
-g++ -fopenmp src/*.cc -o out/prog
+
+export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
+mpic++ -fopenmp src/*.cc -o out/prog
 
 echo "Executing program..."
-time ./out/prog
+time mpiexec -np $SLURM_NTASKS ./out/prog
 
 echo "Done"
