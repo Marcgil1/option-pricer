@@ -8,15 +8,13 @@
 #include <mpi.h>
 #include <omp.h>
 
-#include "eulerConstantLinearEuropeanPutPricer.hh"
-#include "exactConstantLinearEuropeanPutPricer.hh"
+#include "optionPricerFactory.hh"
 
 int    numTrials  = 10000;
 double returnRate = 0.06;
 
 void aggregatePartialResults(double ownSumOptionVals, int numProc) {
 	double sumOptionVals = ownSumOptionVals;
-	std::cout << "Initial value: " << ownSumOptionVals << std::endl;
 
 	for (int pid = 1; pid < numProc; pid++) {
 		double     partialOptionVal;
@@ -36,7 +34,6 @@ void aggregatePartialResults(double ownSumOptionVals, int numProc) {
 }
 
 void sendPartialResults(double sumOptionVals, int pid) {
-	std::cout << "Sent: " << sumOptionVals << std::endl;
 	auto fd = MPI_Send(&sumOptionVals, 1, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD);
 	if (fd != MPI_SUCCESS) {
 		std::cerr << "Error when sending partial results from " << pid << std::endl;
@@ -53,11 +50,12 @@ int main() {
 	auto generator    = std::make_unique<std::default_random_engine>(pid);
 	auto distribution = std::make_unique<std::normal_distribution<double>>(0.0, 1.0);
 
+	auto optionPricer = OptionPricerFactory::getDefaultOptionPricer();
 	// TODO: Construct `optionPricer` through factory class.
-	EulerConstantLinearEuropeanPutPricer optionPricer;
+	//EulerConstantLinearEuropeanPutPricer optionPricer;
 
 	auto optionVals =
-		optionPricer.calculateTrialVals(numTrials);
+		optionPricer->calculateTrialVals(numTrials);
 	auto sumOptionVals =
 		std::accumulate(
 			optionVals->begin(),
