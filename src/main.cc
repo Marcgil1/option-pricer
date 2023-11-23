@@ -49,10 +49,7 @@ int main() {
 	// TODO: Investigate why the random engine is ignoring its seed.
 	auto generator    = std::make_unique<std::default_random_engine>(pid);
 	auto distribution = std::make_unique<std::normal_distribution<double>>(0.0, 1.0);
-
 	auto optionPricer = OptionPricerFactory::getDefaultOptionPricer();
-	// TODO: Construct `optionPricer` through factory class.
-	//EulerConstantLinearEuropeanPutPricer optionPricer;
 
 	auto optionVals =
 		optionPricer->calculateTrialVals(numTrials);
