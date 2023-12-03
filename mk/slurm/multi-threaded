@@ -9,11 +9,12 @@ echo "Multi-threaded execution"
 echo "Loading modules..."
 module purge
 module load toolchain/gompi
+module load numlib/OpenBLAS
 
 echo "Compiling program..."
 
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
-mpic++ -std=c++20 -fopenmp src/*.cc -o out/prog
+mpic++ -std=c++20 -fopenmp -lopenblas src/*.cc -o out/prog
 
 echo "Executing program..."
 time mpiexec -np $SLURM_NTASKS ./out/prog
