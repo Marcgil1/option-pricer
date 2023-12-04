@@ -21,14 +21,16 @@ class ConstantLinearEuropeanPutPricer {
 		std::unique_ptr<std::vector<double>>
 		calculateTrialVals(unsigned numTrials);
 
-		ConstantLinearEuropeanPutPricer()
-			: generator   (std::make_unique<std::default_random_engine>())
-			, distribution(std::make_unique<std::normal_distribution<double>>())
+		ConstantLinearEuropeanPutPricer(
+			std::unique_ptr<std::mt19937>                     generator,
+			std::unique_ptr<std::normal_distribution<double>> distribution)
+			: generator   (std::move(generator))
+			, distribution(std::move(distribution))
 			, trialVals   (std::make_unique<std::vector<double>>())
 			{}
 
 	protected:
-		std::unique_ptr<std::default_random_engine>       generator;
+		std::unique_ptr<std::mt19937>                     generator;
 		std::unique_ptr<std::normal_distribution<double>> distribution;
 
 		std::unique_ptr<std::vector<double>> trialVals;

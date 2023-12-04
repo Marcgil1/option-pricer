@@ -45,11 +45,11 @@ int main() {
 	int pid;     MPI_Comm_rank(MPI_COMM_WORLD, &pid);
 	int numProc; MPI_Comm_size(MPI_COMM_WORLD, &numProc);
 
-	// TODO: Implement dependency injection with these variables.
-	// TODO: Investigate why the random engine is ignoring its seed.
-	auto generator    = std::make_unique<std::default_random_engine>(pid);
+	auto generator    = std::make_unique<std::mt19937>(pid);
 	auto distribution = std::make_unique<std::normal_distribution<double>>(0.0, 1.0);
-	auto optionPricer = OptionPricerFactory::getDefaultOptionPricer();
+	auto optionPricer = OptionPricerFactory::getDefaultOptionPricer(
+			std::move(generator), std::move(distribution)
+	);
 
 	auto optionVals =
 		optionPricer->calculateTrialVals(numTrials);

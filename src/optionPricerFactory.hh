@@ -8,5 +8,8 @@ class OptionPricerFactory {
 		std::unique_ptr<
 			ConstantLinearEuropeanPutPricer
 		>
-		getDefaultOptionPricer();
+		getDefaultOptionPricer(
+			std::unique_ptr<std::mt19937> generator,
+			std::unique_ptr<std::normal_distribution<double>> distribution
+		);
 };
