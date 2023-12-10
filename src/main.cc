@@ -1,7 +1,7 @@
 #include "logging/logger.hh"
 #include "mpimanager/mpimanager.hh"
 #include "opalgorithm/europeanopalgorithm.hh"
-#include "opexecutor/singlenodeopexecutor.hh"
+#include "opexecutor/opexecutor.hh"
 #include "sdesimulator/eulersdesimulator.hh"
 
 #include <iostream>
@@ -27,7 +27,7 @@ int main() {
 		std::make_unique<EuropeanOpAlgorithm>(
 			std::move(sdeSimulator));
 	auto opExecutor =
-		std::make_unique<SingleNodeOpExecutor>(
+		std::make_unique<OpExecutor>(
 			std::move(opAlgorithm),
 			mpiManager,
 			logger

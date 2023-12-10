@@ -22,6 +22,6 @@ class OpExecutor {
 			, logger     (          logger      )
 			{}
 
-		virtual void   run()       = 0;
-		virtual double getResult() = 0;
+		void   run();
+		double getResult();
 };
