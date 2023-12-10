@@ -17,6 +17,11 @@ MpiManager::getPid() {
 	return pid;
 }
 
+int
+MpiManager::getNumProc() {
+	return numProc;
+}
+
 bool
 MpiManager::isMaster() {
 	return pid == 0;

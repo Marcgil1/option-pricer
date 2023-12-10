@@ -10,6 +10,9 @@
 
 
 int main() {
+	int    numTrials  = 10000;
+	double returnRate = 0.06;
+
 	auto mpiManager =
 		std::make_shared<MpiManager>();
 	auto logger =
@@ -25,7 +28,9 @@ int main() {
 			std::move(distribution));
 	auto opAlgorithm =
 		std::make_unique<EuropeanOpAlgorithm>(
-			std::move(sdeSimulator));
+			std::move(sdeSimulator),
+			numTrials * mpiManager->getNumProc(),
+			returnRate);
 	auto opExecutor =
 		std::make_unique<OpExecutor>(
 			std::move(opAlgorithm),

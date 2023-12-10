@@ -6,10 +6,10 @@
 
 std::shared_ptr<Aggregator>
 EuropeanOpAlgorithm::getAggregator() {
-	return std::make_shared<EuropeanAggregator>();
+	return aggregator;
 }
 
 std::shared_ptr<PartialCalculator>
 EuropeanOpAlgorithm::getPartialCalculator() {
-	return std::make_shared<EuropeanPartialCalculator>();
+	return partialCalculator;
 }
