@@ -20,4 +20,5 @@ class MpiManager {
 		void receiveResults(std::back_insert_iterator<Container> it);
 	private:
 		int pid;
+		int numProc;
 };
