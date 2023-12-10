@@ -20,3 +20,15 @@ bool
 MpiManager::isMaster() {
 	return pid == 0;
 }
+
+void
+MpiManager::send(double partialResult) {
+	// TODO: Implemnt.
+}
+
+void
+MpiManager::receiveResults(
+	std::back_insert_iterator<Container> it)
+{
+	// TODO: Implement.
+}

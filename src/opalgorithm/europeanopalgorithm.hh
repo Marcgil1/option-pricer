@@ -1,5 +1,7 @@
 #pragma once
 
+#include "./aggregator.hh"
+#include "./partialcalculator.hh"
 #include "./opalgorithm.hh"
 #include "../sdesimulator/sdesimulator.hh"
 
@@ -11,4 +13,7 @@ class EuropeanOpAlgorithm : public OpAlgorithm {
 			std::unique_ptr<SdeSimulator> sdeSimulator)
 			: OpAlgorithm(std::move(sdeSimulator))
 			{}
+		
+		std::shared_ptr<Aggregator>        getAggregator()        override;
+		std::shared_ptr<PartialCalculator> getPartialCalculator() override;
 };

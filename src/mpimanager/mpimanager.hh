@@ -1,6 +1,12 @@
 #pragma once
 
+#include <iterator>
+#include <vector>
+
 #include <mpi.h>
+
+
+typedef std::vector<double> Container;
 
 
 class MpiManager {
@@ -10,6 +16,8 @@ class MpiManager {
 		void finish();
 		int  getPid();
 		bool isMaster();
+		void send(double partialResult);
+		void receiveResults(std::back_insert_iterator<Container> it);
 	private:
 		int pid;
 };
