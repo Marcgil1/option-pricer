@@ -7,6 +7,12 @@
 
 
 class EulerSdeSimulator: public SdeSimulator {
+	protected:
+		void calcSimulations(
+			std::vector<double>& res,
+			size_t               numTrials) override;
+	private:
+		double calcSingleSimulation(size_t trial);
 	public:
 		EulerSdeSimulator(
 			std::unique_ptr<std::mt19937>                     generator,

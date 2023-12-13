@@ -20,9 +20,8 @@ class EuropeanOpAlgorithm : public OpAlgorithm {
 			std::unique_ptr<SdeSimulator> sdeSimulator,
 			int                           totalSimulations,
 			double                        returnRate)
-			: OpAlgorithm      (std::move(sdeSimulator), totalSimulations, returnRate)
-			, aggregator       (std::make_shared<EuropeanAggregator>(totalSimulations, returnRate))
-			, partialCalculator(std::make_shared<EuropeanPartialCalculator>())
+			: aggregator       (std::make_shared<EuropeanAggregator>(totalSimulations, returnRate))
+			, partialCalculator(std::make_shared<EuropeanPartialCalculator>(std::move(sdeSimulator)))
 			{}
 		
 		std::shared_ptr<Aggregator>        getAggregator()        override;

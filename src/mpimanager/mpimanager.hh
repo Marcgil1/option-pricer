@@ -1,6 +1,9 @@
 #pragma once
 
+#include "../logging/logger.hh"
+
 #include <iterator>
+#include <memory>
 #include <vector>
 
 #include <mpi.h>
@@ -11,7 +14,12 @@ typedef std::vector<double> Container;
 
 class MpiManager {
 	public:
-		MpiManager(): pid(-1) {}
+		MpiManager(
+			std::shared_ptr<Logger> logger)
+			: logger (logger)
+			, pid    (-1)
+			, numProc(0)
+			{}
 
 		void init();
 		void finish();
@@ -23,4 +31,5 @@ class MpiManager {
 	private:
 		int pid;
 		int numProc;
+		std::shared_ptr<Logger> logger;
 };
