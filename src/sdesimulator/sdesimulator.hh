@@ -13,8 +13,9 @@ class SdeSimulator {
 		std::vector<std::vector<double>>                  rndNums;
 
 		virtual void calcSimulations(
-			std::vector<double>& res,
-			size_t               numTrials) = 0;
+			std::vector<std::vector<double>>& res,
+			size_t                            numTrials,
+			size_t                            samplesPerTrial) = 0;
 	private:
 		void calcRandomNumbers(size_t numTrials);
 	public:
@@ -25,5 +26,8 @@ class SdeSimulator {
 			, distribution(std::move(distribution))
 			{}
 
-		void simulate(std::vector<double>& res, size_t numTrials);
+		void simulate(
+			std::vector<std::vector<double>>& res,
+			size_t                            numTrials,
+			size_t                            samplesPerTrial);
 };

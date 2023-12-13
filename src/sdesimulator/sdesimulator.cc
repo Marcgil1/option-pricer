@@ -4,9 +4,13 @@
 
 
 void
-SdeSimulator::simulate(std::vector<double>& res, size_t numTrials) {
+SdeSimulator::simulate(
+	std::vector<std::vector<double>>& res,
+	size_t                            numTrials,
+	size_t                            samplesPerTrial)
+{
 	calcRandomNumbers(     numTrials);
-	calcSimulations  (res, numTrials);
+	calcSimulations  (res, numTrials, samplesPerTrial);
 }
 
 void

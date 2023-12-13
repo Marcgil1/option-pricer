@@ -9,10 +9,14 @@
 class EulerSdeSimulator: public SdeSimulator {
 	protected:
 		void calcSimulations(
-			std::vector<double>& res,
-			size_t               numTrials) override;
+			std::vector<std::vector<double>>& res,
+			size_t                            numTrials,
+			size_t                            samplesPerTrial) override;
 	private:
-		double calcSingleSimulation(size_t trial);
+		void calcSingleSimulation(
+			std::vector<double>& singlePath,
+			size_t               trial,
+			size_t               samplesPerTrial);
 	public:
 		EulerSdeSimulator(
 			std::unique_ptr<std::mt19937>                     generator,
