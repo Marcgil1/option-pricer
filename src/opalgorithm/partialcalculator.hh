@@ -3,6 +3,7 @@
 #include "../sdesimulator/sdesimulator.hh"
 
 #include <memory>
+#include <vector>
 
 
 class PartialCalculator {
@@ -14,5 +15,5 @@ class PartialCalculator {
 			: sdeSimulator(std::move(sdeSimulator))
 			{}
 
-		virtual double run() = 0;
+		virtual std::vector<double> run() = 0;
 };

@@ -7,7 +7,10 @@
 
 double
 EuropeanAggregator::aggregate(Iterator beg, Iterator end) {
-	auto sumOptionVals       = std::accumulate(beg, end, 0.0);
+	double sumOptionVals = 0.0;
+	for (auto it = beg; it != end; it++)
+		sumOptionVals += it->front();
+
 	auto meanOptionVal       = sumOptionVals / double(totalSimulations);
 	auto discountedOptionVal = std::exp(-returnRate * TOTAL_TIME) * meanOptionVal;
 	return discountedOptionVal;

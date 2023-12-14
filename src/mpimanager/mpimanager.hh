@@ -9,7 +9,7 @@
 #include <mpi.h>
 
 
-typedef std::vector<double> Container;
+typedef std::vector<std::vector<double>> Container;
 
 
 class MpiManager {
@@ -26,7 +26,7 @@ class MpiManager {
 		int  getPid();
 		int  getNumProc();
 		bool isMaster();
-		void send(double partialResult);
+		void send(std::vector<double> const& partialResult);
 		void receiveResults(std::back_insert_iterator<Container> it);
 	private:
 		int pid;

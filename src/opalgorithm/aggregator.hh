@@ -3,7 +3,7 @@
 #include <vector>
 
 
-typedef std::vector<double>::iterator Iterator;
+typedef std::vector<std::vector<double>>::iterator Iterator;
 
 
 class Aggregator {

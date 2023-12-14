@@ -4,6 +4,7 @@
 #include "../sdesimulator/sdesimulator.hh"
 
 #include <memory>
+#include <vector>
 
 
 class EuropeanPartialCalculator: public PartialCalculator {
@@ -13,5 +14,5 @@ class EuropeanPartialCalculator: public PartialCalculator {
 			: PartialCalculator(std::move(sdeSimulator))
 			{}
 
-		double run() override;
+		std::vector<double> run() override;
 };

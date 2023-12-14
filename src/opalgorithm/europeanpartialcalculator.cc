@@ -4,7 +4,7 @@
 #include <vector>
 
 
-double
+std::vector<double>
 EuropeanPartialCalculator::run() {
 	std::vector<std::vector<double>> underlyingValuations;
 	std::vector<double>              putValuations;
@@ -20,9 +20,11 @@ EuropeanPartialCalculator::run() {
 	for (size_t i = 0; i < std::size(underlyingValuations); i++)
 		putValuations[i] = std::max(STRIKE_PRICE - underlyingValuations[i][0], 0.0);
 
-	return std::accumulate(
-		std::begin(putValuations),
-		std::end  (putValuations),
-		0.0
-	);
+	return {
+		std::accumulate(
+			std::begin(putValuations),
+			std::end  (putValuations),
+			0.0
+		)
+	};
 }

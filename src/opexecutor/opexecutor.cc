@@ -6,12 +6,12 @@
 
 void
 OpExecutor::run() {
-	auto partialCalculator =
-		opAlgorithm->getPartialCalculator();
+	auto simulation =
+		opAlgorithm
+			->getPartialCalculator()
+			->run();
 
-	mpiManager->send(
-		partialCalculator->run()
-	);
+	mpiManager->send(simulation);
 }
 
 double
@@ -20,7 +20,7 @@ OpExecutor::getResult() {
 		return -1;
 
 	auto aggregator = opAlgorithm->getAggregator();
-	auto results    = std::vector<double>();
+	auto results    = std::vector<std::vector<double>>();
 	mpiManager->receiveResults(
 		std::back_inserter(results)
 	);
