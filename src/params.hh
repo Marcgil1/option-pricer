@@ -1,6 +1,7 @@
 #pragma once
 
-#define NUM_TRIALS         (   int(10000))
+// Temporary, NUM_TRIALS=NUM_PROCS
+#define NUM_TRIALS         (   int(20))
 #define INITIAL_VALUE      (double(5.0))
 #define STRIKE_PRICE       (double(10.0))
 #define NUM_STEPS          (   int(1000))
