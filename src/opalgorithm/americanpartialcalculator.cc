@@ -1,5 +1,14 @@
 #include "./americanpartialcalculator.hh"
 
-std::vector<double> run() {
-	return { 1.0 };
+std::vector<double>
+AmericanPartialCalculator::run() {
+	std::vector<std::vector<double>> valuations;
+
+	sdeSimulator->simulate(
+		valuations,
+		1,
+		NUM_EXERCISE_DATES
+	);
+
+	return valuations.front();
 }

@@ -2,6 +2,7 @@
 
 #include "./partialcalculator.hh"
 #include "../sdesimulator/sdesimulator.hh"
+#include "../params.hh"
 
 #include <memory>
 #include <vector>

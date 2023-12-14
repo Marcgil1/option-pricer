@@ -1,7 +1,11 @@
 #include "params.hh"
 #include "logging/logger.hh"
 #include "mpimanager/mpimanager.hh"
+#ifdef MK_EUROPEAN
 #include "opalgorithm/europeanopalgorithm.hh"
+#else
+#include "opalgorithm/americanopalgorithm.hh"
+#endif
 #include "opexecutor/opexecutor.hh"
 #include "sdesimulator/eulersdesimulator.hh"
 
@@ -27,11 +31,17 @@ int main() {
 		std::make_unique<EulerSdeSimulator>(
 			std::move(generator),
 			std::move(distribution));
+	#ifdef MK_EUROPEAN
 	auto opAlgorithm =
 		std::make_unique<EuropeanOpAlgorithm>(
 			std::move(sdeSimulator),
 			NUM_TRIALS * mpiManager->getNumProc(),
 			RETURN_RATE);
+	#else
+	auto opAlgorithm =
+		std::make_unique<AmericanOpAlgorithm>(
+			std::move(sdeSimulator));
+	#endif
 	auto opExecutor =
 		std::make_unique<OpExecutor>(
 			std::move(opAlgorithm),
